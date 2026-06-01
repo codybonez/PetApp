@@ -6,5 +6,10 @@ namespace PetApp
         {
             InitializeComponent();
         }
+
+        public void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
