@@ -14,9 +14,18 @@ namespace PetApp
         public string Dog { get; set; }
         public string Elder { get; set; }
 
-
-
-      public void PetDog(Pet pet)
+        public Status Pet_Status = Status.Happy;
+        public enum Status
+        {
+            Happy, 
+            Sad,
+            Tired,
+            Hungry,
+            Angry,
+            Sleeping
+        }
+      
+        public void PetDog(Pet pet)
         {
 
 
