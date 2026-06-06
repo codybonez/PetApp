@@ -17,8 +17,8 @@ namespace PetApp
         // Eating, , Sleeping, and maybe age?
         // Petting requires cooldown and when you reach the limit makes the pet tired
         // ]
-        DateTime Time = DateTime.Now;
-        
+        DateTime Time = DateTime.Today;
+       
         
         public int Food_Counter { get; set; }
         public int Attention_Counter { get; set; }
@@ -41,11 +41,11 @@ namespace PetApp
         }
         public DateTime currentTime(Pet pet)
         {
-            if (Time.Day == 7)
+            if (Time.Day <= 7)
             {
                 pet.Pet_Age = Age.Puppy;
             }
-            else if (Time.Day == 14)
+            else if (Time.Day <= 14)
             {
                 pet.Pet_Age = Age.Dog;
             }
@@ -53,7 +53,7 @@ namespace PetApp
             {
                 pet.Pet_Age= Age.Elder;
             }
-        ;
+        
             return Time;
         }
     public void petDog(Pet pet  )
@@ -108,13 +108,20 @@ namespace PetApp
             }
 
         }
-        public void feedDog(Pet pet)
+        public DateTime feedDog(Pet pet)
         {
-
+            pet.Time = DateTime.Now;
+            var feedingTime1 = DateTime.Today.AddHours(7.0);
+            var feedingTime2 = DateTime.Today.AddHours(12.0);
+            var feedingTime3 = DateTime.Today.AddHours(18.0);
             if (pet.Pet_Age == Pet.Age.Puppy)
             {
-              
-                
+                if (pet.Time >= feedingTime1 && pet.Time <= DateTime.Today.AddHours(8))
+                {
+
+                }
+         
+             
             }
             else if (pet.Pet_Age == Pet.Age.Dog)
             {
@@ -124,6 +131,7 @@ namespace PetApp
             {
 
             }
+            return Time;
         }
     }
 

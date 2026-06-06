@@ -36,6 +36,8 @@
             lbl_petname = new Label();
             lbl_PetAge = new Label();
             lblShowTime = new Label();
+            lbl_petCooldown = new Label();
+            btn_FeedingTimes = new Button();
             ((System.ComponentModel.ISupportInitialize)PetPicture).BeginInit();
             SuspendLayout();
             // 
@@ -87,7 +89,6 @@
             lbl_status.Size = new Size(85, 15);
             lbl_status.TabIndex = 4;
             lbl_status.Text = "Current Status:";
-            lbl_status.Click += label1_Click;
             // 
             // lbl_petname
             // 
@@ -117,11 +118,34 @@
             lblShowTime.TabIndex = 7;
             lblShowTime.Text = "Time: ";
             // 
+            // lbl_petCooldown
+            // 
+            lbl_petCooldown.AutoSize = true;
+            lbl_petCooldown.Location = new Point(535, 270);
+            lbl_petCooldown.Name = "lbl_petCooldown";
+            lbl_petCooldown.Size = new Size(106, 15);
+            lbl_petCooldown.TabIndex = 9;
+            lbl_petCooldown.Text = "Petting Cooldown:";
+            lbl_petCooldown.Click += lbl_petCooldown_Click;
+            // 
+            // btn_FeedingTimes
+            // 
+            btn_FeedingTimes.AutoSize = true;
+            btn_FeedingTimes.Location = new Point(497, 86);
+            btn_FeedingTimes.Name = "btn_FeedingTimes";
+            btn_FeedingTimes.Size = new Size(160, 28);
+            btn_FeedingTimes.TabIndex = 10;
+            btn_FeedingTimes.Text = "Click To See Feeding Times";
+            btn_FeedingTimes.UseVisualStyleBackColor = true;
+            btn_FeedingTimes.Click += btn_FeedingTimes_Click;
+            // 
             // PetForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btn_FeedingTimes);
+            Controls.Add(lbl_petCooldown);
             Controls.Add(lblShowTime);
             Controls.Add(lbl_PetAge);
             Controls.Add(lbl_petname);
@@ -132,6 +156,7 @@
             Controls.Add(PetPicture);
             Name = "PetForm";
             Text = "PetForm";
+            Load += PetForm_Load;
             ((System.ComponentModel.ISupportInitialize)PetPicture).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -147,5 +172,7 @@
         public Label lbl_petname;
         public Label lbl_PetAge;
         private Label lblShowTime;
+        private Label lbl_petCooldown;
+        private Button btn_FeedingTimes;
     }
 }
