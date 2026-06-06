@@ -32,12 +32,17 @@
             Btn_Feed = new Button();
             Btn_PetMe = new Button();
             Btn_NamePet = new Button();
+            lbl_status = new Label();
+            lbl_petname = new Label();
+            lbl_PetAge = new Label();
+            lblShowTime = new Label();
             ((System.ComponentModel.ISupportInitialize)PetPicture).BeginInit();
             SuspendLayout();
             // 
             // PetPicture
             // 
-            PetPicture.Location = new Point(12, 57);
+            PetPicture.Image = Properties.Resources.HappyDog;
+            PetPicture.Location = new Point(12, 41);
             PetPicture.Name = "PetPicture";
             PetPicture.Size = new Size(352, 340);
             PetPicture.TabIndex = 0;
@@ -62,6 +67,7 @@
             Btn_PetMe.TabIndex = 2;
             Btn_PetMe.Text = "Pet Me!";
             Btn_PetMe.UseVisualStyleBackColor = true;
+            Btn_PetMe.Click += Btn_PetMe_Click;
             // 
             // Btn_NamePet
             // 
@@ -73,11 +79,53 @@
             Btn_NamePet.UseVisualStyleBackColor = true;
             Btn_NamePet.Click += Btn_NamePet_Click;
             // 
+            // lbl_status
+            // 
+            lbl_status.AutoSize = true;
+            lbl_status.Location = new Point(3, 384);
+            lbl_status.Name = "lbl_status";
+            lbl_status.Size = new Size(85, 15);
+            lbl_status.TabIndex = 4;
+            lbl_status.Text = "Current Status:";
+            lbl_status.Click += label1_Click;
+            // 
+            // lbl_petname
+            // 
+            lbl_petname.AutoSize = true;
+            lbl_petname.Location = new Point(3, 426);
+            lbl_petname.Name = "lbl_petname";
+            lbl_petname.Size = new Size(62, 15);
+            lbl_petname.TabIndex = 5;
+            lbl_petname.Text = "Pet Name:";
+            // 
+            // lbl_PetAge
+            // 
+            lbl_PetAge.AutoSize = true;
+            lbl_PetAge.Location = new Point(3, 400);
+            lbl_PetAge.Name = "lbl_PetAge";
+            lbl_PetAge.Size = new Size(51, 15);
+            lbl_PetAge.TabIndex = 6;
+            lbl_PetAge.Text = "Pet Age:";
+            lbl_PetAge.Click += lbl_PetAge_Click;
+            // 
+            // lblShowTime
+            // 
+            lblShowTime.AutoSize = true;
+            lblShowTime.Location = new Point(469, 20);
+            lblShowTime.Name = "lblShowTime";
+            lblShowTime.Size = new Size(40, 15);
+            lblShowTime.TabIndex = 7;
+            lblShowTime.Text = "Time: ";
+            // 
             // PetForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblShowTime);
+            Controls.Add(lbl_PetAge);
+            Controls.Add(lbl_petname);
+            Controls.Add(lbl_status);
             Controls.Add(Btn_NamePet);
             Controls.Add(Btn_PetMe);
             Controls.Add(Btn_Feed);
@@ -86,6 +134,7 @@
             Text = "PetForm";
             ((System.ComponentModel.ISupportInitialize)PetPicture).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -94,5 +143,9 @@
         private Button Btn_Feed;
         private Button Btn_PetMe;
         private Button Btn_NamePet;
+        public Label lbl_status;
+        public Label lbl_petname;
+        public Label lbl_PetAge;
+        private Label lblShowTime;
     }
 }
