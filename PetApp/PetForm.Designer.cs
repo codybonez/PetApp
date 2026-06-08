@@ -31,12 +31,10 @@
             PetPicture = new PictureBox();
             Btn_Feed = new Button();
             Btn_PetMe = new Button();
-            Btn_NamePet = new Button();
             lbl_status = new Label();
             lbl_petname = new Label();
             lbl_PetAge = new Label();
             lblShowTime = new Label();
-            lbl_petCooldown = new Label();
             btn_FeedingTimes = new Button();
             ((System.ComponentModel.ISupportInitialize)PetPicture).BeginInit();
             SuspendLayout();
@@ -70,16 +68,6 @@
             Btn_PetMe.Text = "Pet Me!";
             Btn_PetMe.UseVisualStyleBackColor = true;
             Btn_PetMe.Click += Btn_PetMe_Click;
-            // 
-            // Btn_NamePet
-            // 
-            Btn_NamePet.Location = new Point(12, 12);
-            Btn_NamePet.Name = "Btn_NamePet";
-            Btn_NamePet.Size = new Size(362, 23);
-            Btn_NamePet.TabIndex = 3;
-            Btn_NamePet.Text = "Rename/Name Pet";
-            Btn_NamePet.UseVisualStyleBackColor = true;
-            Btn_NamePet.Click += Btn_NamePet_Click;
             // 
             // lbl_status
             // 
@@ -118,16 +106,6 @@
             lblShowTime.TabIndex = 7;
             lblShowTime.Text = "Time: ";
             // 
-            // lbl_petCooldown
-            // 
-            lbl_petCooldown.AutoSize = true;
-            lbl_petCooldown.Location = new Point(535, 270);
-            lbl_petCooldown.Name = "lbl_petCooldown";
-            lbl_petCooldown.Size = new Size(106, 15);
-            lbl_petCooldown.TabIndex = 9;
-            lbl_petCooldown.Text = "Petting Cooldown:";
-            lbl_petCooldown.Click += lbl_petCooldown_Click;
-            // 
             // btn_FeedingTimes
             // 
             btn_FeedingTimes.AutoSize = true;
@@ -145,12 +123,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(btn_FeedingTimes);
-            Controls.Add(lbl_petCooldown);
             Controls.Add(lblShowTime);
             Controls.Add(lbl_PetAge);
             Controls.Add(lbl_petname);
             Controls.Add(lbl_status);
-            Controls.Add(Btn_NamePet);
             Controls.Add(Btn_PetMe);
             Controls.Add(Btn_Feed);
             Controls.Add(PetPicture);
@@ -167,12 +143,10 @@
         public PictureBox PetPicture;
         private Button Btn_Feed;
         private Button Btn_PetMe;
-        private Button Btn_NamePet;
         public Label lbl_status;
         public Label lbl_petname;
         public Label lbl_PetAge;
         private Label lblShowTime;
-        private Label lbl_petCooldown;
         private Button btn_FeedingTimes;
     }
 }
