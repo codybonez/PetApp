@@ -36,6 +36,7 @@
             lbl_PetAge = new Label();
             lblShowTime = new Label();
             btn_FeedingTimes = new Button();
+            btn_Save = new Button();
             ((System.ComponentModel.ISupportInitialize)PetPicture).BeginInit();
             SuspendLayout();
             // 
@@ -117,11 +118,22 @@
             btn_FeedingTimes.UseVisualStyleBackColor = true;
             btn_FeedingTimes.Click += btn_FeedingTimes_Click;
             // 
+            // btn_Save
+            // 
+            btn_Save.Location = new Point(469, 358);
+            btn_Save.Name = "btn_Save";
+            btn_Save.Size = new Size(75, 23);
+            btn_Save.TabIndex = 11;
+            btn_Save.Text = "Save";
+            btn_Save.UseVisualStyleBackColor = true;
+            btn_Save.Click += btn_Save_Click;
+            // 
             // PetForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btn_Save);
             Controls.Add(btn_FeedingTimes);
             Controls.Add(lblShowTime);
             Controls.Add(lbl_PetAge);
@@ -148,5 +160,6 @@
         public Label lbl_PetAge;
         private Label lblShowTime;
         private Button btn_FeedingTimes;
+        private Button btn_Save;
     }
 }
