@@ -179,7 +179,7 @@ namespace PetApp
             {
                 feedingTime3 = DateTime.Today.AddHours(18);
 
-                if ( pet.Pet_Status == Pet.Status.Hungry )
+                if ( pet.Pet_Status == Pet.Status.Hungry ) 
                 {
                     pet.Pet_Status = Pet.Status.Happy;
                     lbl_status.Text = $"Current Status: {pet.Pet_Status.ToString()}";
