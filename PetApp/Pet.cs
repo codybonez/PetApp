@@ -65,23 +65,34 @@ namespace PetApp
             File.WriteAllText("PetStatus.json", jsonString);
 
         }
-        public  Pet Load()
+        public  Pet Load(Pet pet)
         {
+            string jsonFromFile;
             string filepath = "C:\\Users\\codynorwood\\source\\repos\\PetApp\\PetApp\\bin\\Debug\\net9.0-windows\\PetStatus.Json";
             if (!File.Exists(filepath))
             {
                 MessageBox.Show("File does not exist");
 
             }
-            
-            
-                string jsonFromFile = File.ReadAllText("PetStatus.json");
+            try
+            {
+                jsonFromFile = File.ReadAllText("PetStatus.json");
 
                 var loadedProducts = JsonSerializer.Deserialize<Pet>(jsonFromFile);
+                pet.Name = loadedProducts.Name;
+                pet.Pet_Status = loadedProducts.Pet_Status;
+                pet.Attention_Counter = loadedProducts.Attention_Counter;
+                pet.Food_Counter = loadedProducts.Food_Counter;
+                return loadedProducts;
+            }
 
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("File not found. Could not load data");
+            }
+            return pet;
+           
 
-
-            return loadedProducts;
         }
     
     }
