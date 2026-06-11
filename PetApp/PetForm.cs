@@ -18,7 +18,7 @@ namespace PetApp
             pet.Load(pet);
             InitializeComponent();
             InitializeDateTimeTracker();
-            if (pet.Food_Counter == 0)
+            if (pet.Food_Counter == 0 && pet.Pet_Status != Status.Sleeping)
             {
                 pet.Pet_Status = Status.Hungry;
                 PetPicture.ImageLocation = Properties.Resources.HungryDog.ToString();
@@ -389,15 +389,11 @@ namespace PetApp
             {
                 pet.Pet_Status = Pet.Status.Sleeping;
                 PetPicture.ImageLocation = Resources.SleepyDog.ToString();
+                pet.DayReset(pet);
                 pet.Save();
             }
-            else if (_time >= wakeupTime && _time < DateTime.Today.AddHours(8))
-            {
-                pet.Pet_Status = Pet.Status.Tired;
-                PetPicture.ImageLocation = PetPicture.ImageLocation = Resources.TiredDog.ToString();
-                pet.Save();
-            }
-            pet.DayReset(pet);
+       
+          
 
         }
 

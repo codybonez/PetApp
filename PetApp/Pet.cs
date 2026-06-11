@@ -83,6 +83,8 @@ namespace PetApp
                 pet.Pet_Status = loadedProducts.Pet_Status;
                 pet.Attention_Counter = loadedProducts.Attention_Counter;
                 pet.Food_Counter = loadedProducts.Food_Counter;
+                pet.Days_Old = loadedProducts.Days_Old;
+                
                 return loadedProducts;
             }
 
@@ -96,14 +98,13 @@ namespace PetApp
         }
         public void DayReset(Pet pet)
         {
-            if (DateTime.Now == DateTime.Today.AddHours(24))
-            {
+          
                 pet.Attention_Counter = 0;
                 pet.Days_Old++;
                 pet.Food_Counter = 0;
                 pet.Time = DateTime.Now;
                 pet.Save();
-            }
+            
         }
     
     }
