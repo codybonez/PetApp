@@ -62,7 +62,7 @@
             // 
             // Btn_PetMe
             // 
-            Btn_PetMe.Location = new Point(535, 234);
+            Btn_PetMe.Location = new Point(486, 120);
             Btn_PetMe.Name = "Btn_PetMe";
             Btn_PetMe.Size = new Size(75, 23);
             Btn_PetMe.TabIndex = 2;
@@ -82,7 +82,7 @@
             // lbl_petname
             // 
             lbl_petname.AutoSize = true;
-            lbl_petname.Location = new Point(3, 426);
+            lbl_petname.Location = new Point(26, 9);
             lbl_petname.Name = "lbl_petname";
             lbl_petname.Size = new Size(62, 15);
             lbl_petname.TabIndex = 5;
@@ -91,7 +91,7 @@
             // lbl_PetAge
             // 
             lbl_PetAge.AutoSize = true;
-            lbl_PetAge.Location = new Point(3, 400);
+            lbl_PetAge.Location = new Point(3, 426);
             lbl_PetAge.Name = "lbl_PetAge";
             lbl_PetAge.Size = new Size(51, 15);
             lbl_PetAge.TabIndex = 6;
@@ -120,7 +120,7 @@
             // 
             // btn_Save
             // 
-            btn_Save.Location = new Point(469, 358);
+            btn_Save.Location = new Point(592, 120);
             btn_Save.Name = "btn_Save";
             btn_Save.Size = new Size(75, 23);
             btn_Save.TabIndex = 11;
@@ -132,6 +132,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.InactiveCaption;
             ClientSize = new Size(800, 450);
             Controls.Add(btn_Save);
             Controls.Add(btn_FeedingTimes);

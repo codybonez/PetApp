@@ -9,31 +9,37 @@ namespace PetApp
     public partial class PetForm : Form
     {
         public Pet pet = new Pet();
-        System.Timers.Timer lastFedTimer;
-        private System.Windows.Forms.Timer timer;
+      System.Windows.Forms.Timer lastFedTimer = new System.Windows.Forms.Timer();   
+        
+        private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         public PetForm()
         {
 
-             pet.Load(pet);
+            pet.Load(pet);
             InitializeComponent();
             InitializeDateTimeTracker();
-            if (pet.Name == null)
+            if (pet.Food_Counter == 0)
             {
-
-
-                string userInput = Interaction.InputBox("Enter your new pet name. Choose wisely:");
-                pet.Name = userInput;
-                MessageBox.Show($"Your pet name is {pet.Name}");
-
+                pet.Pet_Status = Status.Hungry;
+                PetPicture.ImageLocation = Properties.Resources.HungryDog.ToString();
             }
+                if (pet.Name == null)
+                {
+
+
+                    string userInput = Interaction.InputBox("Enter your new pet name. Choose wisely:");
+                    pet.Name = userInput;
+                    MessageBox.Show($"Your pet name is {pet.Name}");
+
+                }
 
 
 
-            lbl_petname.Text = $"Pet Name: {pet.Name}";
-            lbl_PetAge.Text = $" Pet Age: {pet.Pet_Age.ToString()}";
+                lbl_petname.Text = $"Pet Name: {pet.Name}";
+                lbl_PetAge.Text = $" Pet Age: {pet.Pet_Age.ToString()}";
 
+            
         }
-
         public void InitializeDateTimeTracker()
         {
 
@@ -65,11 +71,7 @@ namespace PetApp
         {
 
             pet.Time = DateTime.Now;
-            if (pet.Time >= DateTime.Today.AddHours(24))
-            {
-                pet.Attention_Counter = 0;
-            }
-
+           
             if (pet.Pet_Age == Pet.Age.Puppy)
             {
                 if (pet.Pet_Status != Pet.Status.Sleeping && pet.Attention_Counter <= 10)
@@ -80,18 +82,20 @@ namespace PetApp
 
 
                     pet.Pet_Status = Pet.Status.Happy;
-
+                    pet.Save();
 
                 }
                 else if (pet.Pet_Status != Pet.Status.Sleeping && pet.Attention_Counter >= 10)
                 {
                     MessageBox.Show($"{pet.Name} is tired. Please wait until the day ends");
                     PetPicture.ImageLocation = Properties.Resources.TiredDog.ToString();
-                    pet.Pet_Status = Pet.Status.Tired;
+                    pet.Pet_Status = Pet.Status.Tired; pet.Save();
                 }
-                else
+                else if (pet.Pet_Status != Pet.Status.Sleeping && pet.Attention_Counter < 5 && pet.Time >= DateTime.Today.AddHours(17) && pet.Food_Counter < 2)
                 {
-
+                    MessageBox.Show($"{pet.Name} is sad, please give some love");
+                    PetPicture.ImageLocation = Properties.Resources.TiredDog.ToString();
+                    pet.Pet_Status = Pet.Status.Tired; pet.Save();
                 }
 
 
@@ -102,42 +106,69 @@ namespace PetApp
             {
 
 
-                if (pet.Pet_Status != Pet.Status.Sleeping)
+                if (pet.Pet_Status != Pet.Status.Sleeping && pet.Attention_Counter <= 10)
                 {
                     MessageBox.Show($"You gave {pet.Name} some pets");
+                    PetPicture.ImageLocation = Properties.Resources.HappyDog.ToString();
+                    pet.Attention_Counter++;
 
+
+                    pet.Pet_Status = Pet.Status.Happy;
+                    pet.Save();
 
                 }
-                else
+                else if (pet.Pet_Status != Pet.Status.Sleeping && pet.Attention_Counter >= 10)
                 {
-                    MessageBox.Show($"{pet.Name} is tired. Please wait until {pet.Name} wants attention");
-
-
+                    MessageBox.Show($"{pet.Name} is tired. Please wait until the day ends");
+                    PetPicture.ImageLocation = Properties.Resources.TiredDog.ToString();
+                    pet.Pet_Status = Pet.Status.Tired; pet.Save();
+                }
+                else if (pet.Pet_Status != Pet.Status.Sleeping && pet.Attention_Counter < 4 && pet.Time >= DateTime.Today.AddHours(17) && pet.Food_Counter < 2)
+                {
+                    MessageBox.Show($"{pet.Name} is sad, please give some love");
+                    PetPicture.ImageLocation = Properties.Resources.TiredDog.ToString();
+                    pet.Pet_Status = Pet.Status.Tired; pet.Save();
                 }
             }
             else
             {
 
 
-                if (pet.Pet_Status != Pet.Status.Sleeping)
+                if (pet.Pet_Status != Pet.Status.Sleeping && pet.Attention_Counter <= 10)
                 {
                     MessageBox.Show($"You gave {pet.Name} some pets");
+                    PetPicture.ImageLocation = Properties.Resources.HappyDog.ToString();
+                    pet.Attention_Counter++;
 
+
+                    pet.Pet_Status = Pet.Status.Happy;
+                    pet.Save();
 
                 }
-                else
+                else if (pet.Pet_Status != Pet.Status.Sleeping && pet.Attention_Counter >= 10)
                 {
-                    MessageBox.Show($"{pet.Name} is tired. Please wait until {pet.Name} wants attention");
-
-
+                    MessageBox.Show($"{pet.Name} is tired. Please wait until the day ends");
+                    PetPicture.ImageLocation = Properties.Resources.TiredDog.ToString();
+                    pet.Pet_Status = Pet.Status.Tired;
+                    pet.Save();
+                }
+                else if (pet.Pet_Status != Pet.Status.Sleeping && pet.Attention_Counter < 3 && pet.Time >= DateTime.Today.AddHours(17) && pet.Food_Counter < 2)
+                {
+                    MessageBox.Show($"{pet.Name} is sad, please give some love");
+                    PetPicture.ImageLocation = Properties.Resources.TiredDog.ToString();
+                    pet.Pet_Status = Pet.Status.Tired; pet.Save();
                 }
             }
 
         }
+
+
+        // Create reset day function that resets food counter
+
         public DateTime feedDog(Pet pet)
         {
 
-            lastFedTimer = new System.Timers.Timer();
+         
             
 
             
@@ -145,36 +176,52 @@ namespace PetApp
           if (lastFedTimer.Enabled)
             {
                 lastFedTimer.Stop();
+                MessageBox.Show("");
             }
-        
-            
+          
             pet.Time = DateTime.Now;
             if (pet.Pet_Age == Pet.Age.Puppy)
             {
 
 
                 if (
-                        pet.Pet_Status == Pet.Status.Hungry && pet.Food_Counter == 0
+                        pet.Pet_Status == Pet.Status.Hungry && pet.Is_Fed == false && pet.Food_Counter <= 4
                  
 
                     )
                 {
                     MessageBox.Show($"{pet.Name} is now well fed.");
-                
+
                     pet.Pet_Status = Pet.Status.Happy;
                     lbl_status.Text = $"Current Status: {pet.Pet_Status.ToString()}";
-                    pet.Food_Counter = 1;
-                    PetPicture.ImageLocation  = Resources.HappyDog.ToString();
-                    lastFedTimer = new System.Timers.Timer
+                    pet.Food_Counter++;
+                    PetPicture.ImageLocation = Resources.HappyDog.ToString();
+                    pet.Is_Fed = true;
+                    pet.Save();
+                    lastFedTimer = new System.Windows.Forms.Timer
                     {
-                        Interval = 1800000
+                        Interval = 10800000
+                     
                     };
-                    lastFedTimer.Elapsed += (sender, e) =>
+                    lastFedTimer.Tick += (sender, e) =>
                     {
-                        pet.Pet_Status = Status.Hungry;
-                        pet.Food_Counter = 0;
-                    };
+                        if (pet.Pet_Status == Status.Sleeping || pet.Pet_Status == Status.Tired)
+                        {
+                            
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Please feed {pet.Name}");
+                            pet.Pet_Status = Status.Hungry;
+                            PetPicture.ImageLocation = Resources.HungryDog.ToString();
+                            pet.Is_Fed = false;
+                            lastFedTimer.Dispose();
+                            pet.Save();
+                        }
+                    
 
+                    };
+                    lastFedTimer.Start();
                 }
                 else
                 {
@@ -189,24 +236,33 @@ namespace PetApp
             {
                 
 
-                if ( pet.Pet_Status == Pet.Status.Hungry && pet.Food_Counter == 0) 
+                if ( pet.Pet_Status == Pet.Status.Hungry && pet.Is_Fed == false && pet.Food_Counter <= 3) 
                 {
+                    MessageBox.Show($"{pet.Name} is now well fed.");
+
                     pet.Pet_Status = Pet.Status.Happy;
                     lbl_status.Text = $"Current Status: {pet.Pet_Status.ToString()}";
-
+                    pet.Food_Counter++;
                     PetPicture.ImageLocation = Resources.HappyDog.ToString();
-
-                    pet.Food_Counter = 1;
-
-                    lastFedTimer = new System.Timers.Timer
+                    pet.Is_Fed = true;
+                    pet.Save();
+                    lastFedTimer = new System.Windows.Forms.Timer
                     {
-                        Interval = 18000
+                        Interval = 14400000
+
                     };
-                    lastFedTimer.Elapsed += (sender, e) =>
+                  
+                    lastFedTimer.Tick += (sender, e) =>
                     {
+                        MessageBox.Show($"Please feed {pet.Name}");
                         pet.Pet_Status = Status.Hungry;
-                        pet.Food_Counter = 0;
+                        PetPicture.ImageLocation = Resources.HungryDog.ToString();
+                        pet.Is_Fed = false;
+                        lastFedTimer.Dispose();
+                        pet.Save();
                     };
+                    lastFedTimer.Start();
+
                 }
                 else
                 {
@@ -219,25 +275,36 @@ namespace PetApp
                 if (
 
 
-                   pet.Food_Counter == 0 && pet.Pet_Status == Status.Hungry
+                   pet.Is_Fed == false && pet.Pet_Status == Status.Hungry && pet.Food_Counter <= 2
 
 
                     )
                 {
+                    MessageBox.Show($"{pet.Name} is now well fed.");
+
                     pet.Pet_Status = Pet.Status.Happy;
                     lbl_status.Text = $"Current Status: {pet.Pet_Status.ToString()}";
-
-                    PetPicture.ImageLocation = PetPicture.ImageLocation = Resources.HappyDog.ToString();
-
-                    lastFedTimer = new System.Timers.Timer
+                    pet.Food_Counter++;
+                    PetPicture.ImageLocation = Resources.HappyDog.ToString();
+                    pet.Is_Fed = true;
+                    pet.Save();
+                    lastFedTimer = new System.Windows.Forms.Timer
                     {
-                        Interval = 18000
+                        Interval =18000000
+                        
                     };
-                    lastFedTimer.Elapsed += (sender, e) =>
+                    lastFedTimer.Tick += (sender, e) =>
                     {
+                        MessageBox.Show($"Please feed {pet.Name}");
                         pet.Pet_Status = Status.Hungry;
-                        pet.Food_Counter = 0;
+                        PetPicture.ImageLocation = Resources.HungryDog.ToString();
+                        pet.Is_Fed = false;
+                        lastFedTimer.Dispose();
+                        pet.Save();
+
                     };
+                    lastFedTimer.Start();
+
 
                 }
                 else
@@ -257,7 +324,7 @@ namespace PetApp
             // Save this to csv for status
 
             PetPicture.ImageLocation = Resources.AngryDog.ToString();
-            string holder = PetPicture.ImageLocation;
+           
 
         }
         public void Btn_Feed_Click(object sender, EventArgs e)
@@ -297,10 +364,10 @@ namespace PetApp
 
         private void btn_FeedingTimes_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("\nPuppies:" +
-                "\nMeal 1: Between 7:00 and 8:00 AM\nMeal 2: Between 12:00 and 1:00 PM\nMeal 3: Between 4:00 and 5:00PM\nMeal 4: Between 7:00 and 8:00PM\n" +
-                "\nAdults: \nMeal 1: Between 7:00 and 8:00 AM\nMeal 2: Between 12:00 and 1:00 PM\nMeal 3: Between 6:00 and 7:00\n"
-                + "\nOld Fellers: \nMeal 1: Between 7:00 and 8:00 AM\nMeal 2: Between 6:00 and 7:00 PM"
+            MessageBox.Show("\nPuppies: Every 3 hours up to 4 times per day\n"
+                 +
+                "\nAdults: Every 4 hours up to 3 times per day\n"
+                + "\nOld Fellers: Every 5 hours up to 2 times per day\n"
 
                 );
         }
@@ -314,7 +381,7 @@ namespace PetApp
             var wakeupTime = DateTime.Today.AddHours(6.5);
 
 
-            //if (pet.Time >= feedingTime1 && pet.Time <= DateTime.Today.AddHours(8)) { }
+            
 
             // Check for feeding times
 
@@ -322,12 +389,15 @@ namespace PetApp
             {
                 pet.Pet_Status = Pet.Status.Sleeping;
                 PetPicture.ImageLocation = Resources.SleepyDog.ToString();
+                pet.Save();
             }
             else if (_time >= wakeupTime && _time < DateTime.Today.AddHours(8))
             {
                 pet.Pet_Status = Pet.Status.Tired;
                 PetPicture.ImageLocation = PetPicture.ImageLocation = Resources.TiredDog.ToString();
+                pet.Save();
             }
+            pet.DayReset(pet);
 
         }
 

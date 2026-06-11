@@ -21,10 +21,10 @@ namespace PetApp
         // ]
         public DateTime Time = DateTime.Today;
 
-
+        public bool Is_Fed;
         public int Food_Counter { get; set; }
         public int Attention_Counter { get; set; }
-
+        public int Days_Old { get; set; }
         public Status Pet_Status { get; set; }
         public Age Pet_Age {get; set;}
         public enum Status
@@ -39,24 +39,24 @@ namespace PetApp
         {
            Puppy,
            Dog ,
-           Elder 
+          Old_Fella
         }
-        public DateTime currentTime(Pet pet)
+        public Pet currentTime(Pet pet)
         {
-            if (Time.Day <= 7)
+            if (pet.Days_Old == 7)
             {
                 pet.Pet_Age = Age.Puppy;
             }
-            else if (Time.Day <= 14)
+            else if (pet.Days_Old == 14)
             {
                 pet.Pet_Age = Age.Dog;
             }
-            else
+            else if (pet.Days_Old == 30)
             {
-                pet.Pet_Age= Age.Elder;
+                pet.Pet_Age= Age.Old_Fella;
             }
         
-            return Time;
+            return pet;
         }
 
        public void Save()
@@ -68,7 +68,7 @@ namespace PetApp
         public  Pet Load(Pet pet)
         {
             string jsonFromFile;
-            string filepath = "C:\\Users\\codynorwood\\source\\repos\\PetApp\\PetApp\\bin\\Debug\\net9.0-windows\\PetStatus.Json";
+            string filepath = "C:\\Users\\CodyB\\source\\repos\\PetApp\\PetApp\\bin\\Debug\\net9.0-windows\\PetStatus.Json";
             if (!File.Exists(filepath))
             {
                 MessageBox.Show("File does not exist");
@@ -93,6 +93,17 @@ namespace PetApp
             return pet;
            
 
+        }
+        public void DayReset(Pet pet)
+        {
+            if (DateTime.Now == DateTime.Today.AddHours(24))
+            {
+                pet.Attention_Counter = 0;
+                pet.Days_Old++;
+                pet.Food_Counter = 0;
+                pet.Time = DateTime.Now;
+                pet.Save();
+            }
         }
     
     }
