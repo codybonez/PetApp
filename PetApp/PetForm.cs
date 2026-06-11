@@ -9,8 +9,8 @@ namespace PetApp
     public partial class PetForm : Form
     {
         public Pet pet = new Pet();
-      System.Windows.Forms.Timer lastFedTimer = new System.Windows.Forms.Timer();   
-        
+        System.Windows.Forms.Timer lastFedTimer = new System.Windows.Forms.Timer();
+
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         public PetForm()
         {
@@ -23,22 +23,22 @@ namespace PetApp
                 pet.Pet_Status = Status.Hungry;
                 PetPicture.ImageLocation = Properties.Resources.HungryDog.ToString();
             }
-                if (pet.Name == null)
-                {
+            if (pet.Name == null)
+            {
 
 
-                    string userInput = Interaction.InputBox("Enter your new pet name. Choose wisely:");
-                    pet.Name = userInput;
-                    MessageBox.Show($"Your pet name is {pet.Name}");
+                string userInput = Interaction.InputBox("Enter your new pet name. Choose wisely:");
+                pet.Name = userInput;
+                MessageBox.Show($"Your pet name is {pet.Name}");
 
-                }
+            }
 
 
 
-                lbl_petname.Text = $"Pet Name: {pet.Name}";
-                lbl_PetAge.Text = $" Pet Age: {pet.Pet_Age.ToString()}";
+            lbl_petname.Text = $"Pet Name: {pet.Name}";
+            lbl_PetAge.Text = $" Pet Age: {pet.Pet_Age.ToString()}";
 
-            
+
         }
         public void InitializeDateTimeTracker()
         {
@@ -71,7 +71,7 @@ namespace PetApp
         {
 
             pet.Time = DateTime.Now;
-           
+
             if (pet.Pet_Age == Pet.Age.Puppy)
             {
                 if (pet.Pet_Status != Pet.Status.Sleeping && pet.Attention_Counter <= 10)
@@ -168,17 +168,17 @@ namespace PetApp
         public DateTime feedDog(Pet pet)
         {
 
-         
-            
 
-            
-            
-          if (lastFedTimer.Enabled)
+
+
+
+
+            if (lastFedTimer.Enabled)
             {
                 lastFedTimer.Stop();
                 MessageBox.Show("");
             }
-          
+
             pet.Time = DateTime.Now;
             if (pet.Pet_Age == Pet.Age.Puppy)
             {
@@ -186,7 +186,7 @@ namespace PetApp
 
                 if (
                         pet.Pet_Status == Pet.Status.Hungry && pet.Is_Fed == false && pet.Food_Counter <= 4
-                 
+
 
                     )
                 {
@@ -201,13 +201,13 @@ namespace PetApp
                     lastFedTimer = new System.Windows.Forms.Timer
                     {
                         Interval = 10800000
-                     
+
                     };
                     lastFedTimer.Tick += (sender, e) =>
                     {
                         if (pet.Pet_Status == Status.Sleeping || pet.Pet_Status == Status.Tired)
                         {
-                            
+
                         }
                         else
                         {
@@ -218,7 +218,7 @@ namespace PetApp
                             lastFedTimer.Dispose();
                             pet.Save();
                         }
-                    
+
 
                     };
                     lastFedTimer.Start();
@@ -234,9 +234,9 @@ namespace PetApp
             }
             else if (pet.Pet_Age == Pet.Age.Dog)
             {
-                
 
-                if ( pet.Pet_Status == Pet.Status.Hungry && pet.Is_Fed == false && pet.Food_Counter <= 3) 
+
+                if (pet.Pet_Status == Pet.Status.Hungry && pet.Is_Fed == false && pet.Food_Counter <= 3)
                 {
                     MessageBox.Show($"{pet.Name} is now well fed.");
 
@@ -251,7 +251,7 @@ namespace PetApp
                         Interval = 14400000
 
                     };
-                  
+
                     lastFedTimer.Tick += (sender, e) =>
                     {
                         MessageBox.Show($"Please feed {pet.Name}");
@@ -290,8 +290,8 @@ namespace PetApp
                     pet.Save();
                     lastFedTimer = new System.Windows.Forms.Timer
                     {
-                        Interval =18000000
-                        
+                        Interval = 18000000
+
                     };
                     lastFedTimer.Tick += (sender, e) =>
                     {
@@ -324,15 +324,15 @@ namespace PetApp
             // Save this to csv for status
 
             PetPicture.ImageLocation = Resources.AngryDog.ToString();
-           
+
 
         }
         public void Btn_Feed_Click(object sender, EventArgs e)
         {
 
             feedDog(pet);
-          
-            
+
+
         }
 
 
@@ -376,12 +376,12 @@ namespace PetApp
         {
             _time = DateTime.Now;
 
-         
+
             var sleepTime = DateTime.Today.AddHours(21.5);
             var wakeupTime = DateTime.Today.AddHours(6.5);
 
 
-            
+
 
             // Check for feeding times
 
@@ -392,8 +392,8 @@ namespace PetApp
                 pet.DayReset(pet);
                 pet.Save();
             }
-       
-          
+
+
 
         }
 
@@ -402,6 +402,19 @@ namespace PetApp
             pet.Save();
         }
 
-     
+        private void btn_meetup_Click(object sender, EventArgs e)
+        {
+
+            // display room code
+            // display pet info
+
+
+            MeetupForm form = new MeetupForm();
+            form.Show();
+            
+                
+            
+            
+        }
     }
 }

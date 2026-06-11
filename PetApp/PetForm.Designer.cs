@@ -37,6 +37,7 @@
             lblShowTime = new Label();
             btn_FeedingTimes = new Button();
             btn_Save = new Button();
+            btn_meetup = new Button();
             ((System.ComponentModel.ISupportInitialize)PetPicture).BeginInit();
             SuspendLayout();
             // 
@@ -128,12 +129,23 @@
             btn_Save.UseVisualStyleBackColor = true;
             btn_Save.Click += btn_Save_Click;
             // 
+            // btn_meetup
+            // 
+            btn_meetup.Location = new Point(447, 323);
+            btn_meetup.Name = "btn_meetup";
+            btn_meetup.Size = new Size(220, 58);
+            btn_meetup.TabIndex = 12;
+            btn_meetup.Text = "Click To Meetup with another pet";
+            btn_meetup.UseVisualStyleBackColor = true;
+            btn_meetup.Click += btn_meetup_Click;
+            // 
             // PetForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.InactiveCaption;
             ClientSize = new Size(800, 450);
+            Controls.Add(btn_meetup);
             Controls.Add(btn_Save);
             Controls.Add(btn_FeedingTimes);
             Controls.Add(lblShowTime);
@@ -162,5 +174,6 @@
         private Label lblShowTime;
         private Button btn_FeedingTimes;
         private Button btn_Save;
+        private Button btn_meetup;
     }
 }
