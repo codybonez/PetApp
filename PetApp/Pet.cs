@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetApp.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,8 @@ namespace PetApp
         public int Days_Old { get; set; }
         public Status Pet_Status { get; set; }
         public Age Pet_Age {get; set;}
+
+        public string Pet_Image { get; set; }
         public enum Status
         {
             Happy, 
@@ -84,6 +87,7 @@ namespace PetApp
                 pet.Attention_Counter = loadedProducts.Attention_Counter;
                 pet.Food_Counter = loadedProducts.Food_Counter;
                 pet.Days_Old = loadedProducts.Days_Old;
+                pet.Pet_Image = loadedProducts.Pet_Image;
                 
                 return loadedProducts;
             }

@@ -14,7 +14,7 @@ namespace PetApp
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         public PetForm()
         {
-
+          
             pet.Load(pet);
             InitializeComponent();
             InitializeDateTimeTracker();
@@ -22,6 +22,7 @@ namespace PetApp
             {
                 pet.Pet_Status = Status.Hungry;
                 PetPicture.ImageLocation = Properties.Resources.HungryDog.ToString();
+                pet.Pet_Image = PetPicture.ImageLocation;
             }
             if (pet.Name == null)
             {
