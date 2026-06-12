@@ -409,9 +409,16 @@ namespace PetApp
             // display room code
             // display pet info
 
-
-            MeetupForm form = new MeetupForm();
-            form.Show();
+            if (pet.Pet_Status == Pet.Status.Sleeping)
+            {
+                MessageBox.Show($"{pet.Name} is sleeping. Please wait until morning to visit.");
+            }
+            else
+            {
+                MeetupForm form = new MeetupForm();
+                form.Show();
+            }
+          
             
                 
             
